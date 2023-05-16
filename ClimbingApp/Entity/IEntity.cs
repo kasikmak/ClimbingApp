@@ -1,7 +1,6 @@
-﻿namespace ClimbingApp.Entity
+﻿namespace ClimbingApp.Entity;
+
+public interface IEntity
 {
-    public interface IEntity
-    {
-        public int Id { get; set; }
-    }
+    public int Id { get; set; }
 }

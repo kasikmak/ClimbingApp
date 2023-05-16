@@ -1,7 +1,6 @@
-﻿namespace ClimbingApp.Entity
+﻿namespace ClimbingApp.Entity;
+
+public class RouteSetter : Climber
 {
-    public class RouteSetter : Climber
-    {
-        public override string ToString() => base.ToString() + " (RouteSetter)";
-    }
+    public override string ToString() => base.ToString() + " (RouteSetter)";
 }

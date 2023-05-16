@@ -1,12 +1,18 @@
-﻿namespace ClimbingApp.Entity
+﻿namespace ClimbingApp.Entity;
+
+public class Climber : EntityBase
 {
-    public class Climber : EntityBase
-    {
-        public string FirstName { get; set; }
 
-        public string LastName { get; set; }
+    //public Climber(string firstName, string lastName)
+    //{
+    //    this.FirstName = firstName;
+    //    this.LastName = lastName;
+    //}
 
-        public override string ToString() => $"Id: {Id} Name: {FirstName} {LastName}";
+    public string FirstName { get; set; }
 
-    }
+    public string LastName { get; set; }
+
+    public override string ToString() => $"Id: {Id} Name: {FirstName} {LastName}";
+
 }

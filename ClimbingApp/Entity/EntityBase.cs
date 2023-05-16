@@ -1,7 +1,6 @@
-﻿namespace ClimbingApp.Entity
+﻿namespace ClimbingApp.Entity;
+
+public abstract class EntityBase : IEntity
 {
-    public abstract class EntityBase : IEntity
-    {
-        public int Id { get; set; }
-    }
+    public int Id { get; set; }
 }

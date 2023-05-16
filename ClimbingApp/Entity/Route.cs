@@ -1,12 +1,11 @@
-﻿namespace ClimbingApp.Entity
+﻿namespace ClimbingApp.Entity;
+
+public class Route : EntityBase
 {
-    public class Route : EntityBase
-    {
-        public string Name { get; set; }
+    public string Name { get; set; }
 
-        public string Grade { get; set; }
+    public string Grade { get; set; }
 
-        public override string ToString() => $"Id: {Id} Name: {Name} Grade: {Grade}";
+    public override string ToString() => $"Id: {Id} Name: {Name} Grade: {Grade}";
 
-    }
 }

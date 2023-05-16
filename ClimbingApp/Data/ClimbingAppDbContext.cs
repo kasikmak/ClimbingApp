@@ -1,18 +1,17 @@
 ﻿using ClimbingApp.Entity;
 using Microsoft.EntityFrameworkCore;
 
-namespace ClimbingApp.Data
+namespace ClimbingApp.Data;
+
+public class ClimbingAppDbContext : DbContext
 {
-    public class ClimbingAppDbContext : DbContext
+    public DbSet<Climber> Climbers => Set<Climber>();
+
+    public DbSet<Route> Routes => Set<Route>();
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        public DbSet<Climber> Climbers => Set<Climber>();
-
-        public DbSet<Route> Routes => Set<Route>();
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseInMemoryDatabase("ClimbingAppAtorage");
-        }
+        base.OnConfiguring(optionsBuilder);
+        optionsBuilder.UseInMemoryDatabase("ClimbingAppAtorage");
     }
 }
