@@ -8,5 +8,5 @@ public static class EntityExtensions
     {
         var json = JsonSerializer.Serialize(itemToCopy);
         return JsonSerializer.Deserialize<T>(json);
-    }
+    }    
 }

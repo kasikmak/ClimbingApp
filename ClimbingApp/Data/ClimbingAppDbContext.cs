@@ -12,6 +12,6 @@ public class ClimbingAppDbContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
-        optionsBuilder.UseInMemoryDatabase("ClimbingAppAtorage");
+        optionsBuilder.UseInMemoryDatabase("ClimbingAppStorage");
     }
 }

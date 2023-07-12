@@ -13,6 +13,8 @@ public class Climber : EntityBase
 
     public string LastName { get; set; }
 
+    public string Nationality { get; set; }
+
     public override string ToString() => $"Id: {Id} Name: {FirstName} {LastName}";
 
 }

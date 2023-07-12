@@ -1,5 +1,6 @@
 ﻿using ClimbingApp.Entity;
 using System.Text.Json;
+using static ClimbingApp.Services.UserCommuniction;
 
 namespace ClimbingApp.Repositories;
 
@@ -8,7 +9,9 @@ public class FileRepository<T> : IRepository<T>
 {
     protected  List<T> _items = new();
 
-    public event EventHandler<T>? ItemAdded, ItemRemoved;
+    public event EventHandler<T>? ItemAdded;
+    public event EventHandler<T>? ItemRemoved;    
+    public event EventHandler<T>? HighRating;
 
     public void ReadRepository()
     {
@@ -24,6 +27,7 @@ public class FileRepository<T> : IRepository<T>
         item.Id = _items.Count + 1;
         _items.Add(item);
         ItemAdded?.Invoke(this, item);
+        HighRating?.Invoke(this, item);
     }
 
     public T GetById(int id)
@@ -46,7 +50,7 @@ public class FileRepository<T> : IRepository<T>
         where T : class, IEntity, new()
     {
         T Object = new();
-        var fileName = Object.GetType().Name + ".txt";
+        var fileName = Object.GetType().Name + ".json";
 
         using (var writer =File.AppendText(fileName))
         {
@@ -64,7 +68,7 @@ public class FileRepository<T> : IRepository<T>
         where T : class, IEntity, new()
     {
         T Object = new();
-        var fileName = Object.GetType().Name + ".txt";
+        var fileName = Object.GetType().Name + ".json";
         List<T> list = new List<T>();
 
         if (File.Exists(fileName))

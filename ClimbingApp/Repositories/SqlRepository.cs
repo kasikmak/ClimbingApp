@@ -1,5 +1,6 @@
 ﻿using ClimbingApp.Entity;
 using Microsoft.EntityFrameworkCore;
+using static ClimbingApp.Services.UserCommuniction;
 
 namespace ClimbingApp.Repositories;
 
@@ -16,12 +17,16 @@ public class SqlRepository<T> : IRepository<T>
         _dbSet = _dbContext.Set<T>();
     }
 
-    public event EventHandler<T> ItemAdded;
+    public event EventHandler<T>? ItemAdded;
+    public event EventHandler<T>? ItemRemoved;
+    public event EventHandler<T>? HighRating;
+    
 
     public void Add(T item)
     {
         _dbSet.Add(item);
-        ItemAdded.Invoke(this, item);
+        ItemAdded?.Invoke(this, item);
+        HighRating?.Invoke(this, item);
     }
 
     public IEnumerable<T> GetAll()
@@ -37,6 +42,8 @@ public class SqlRepository<T> : IRepository<T>
     public void Remove(T item)
     {
         _dbSet.Remove(item);
+        ItemRemoved?.Invoke(this, item);
+
     }
 
     public void Save()
