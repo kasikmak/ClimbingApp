@@ -1,5 +1,5 @@
-﻿using ClimbingApp.Entity;
-using ClimbingApp.Repositories;
+﻿using ClimbingApp.Data.Entity;
+using ClimbingApp.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data;

@@ -1,12 +1,7 @@
-﻿using ClimbingApp.DataProviders;
-using ClimbingApp.Entity;
-using ClimbingApp.Repositories;
+﻿using ClimbingApp.Components.CsvReader;
+using ClimbingApp.Components.DataProviders;
+using ClimbingApp.Components.XmlProcessor;
 using ClimbingApp.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClimbingApp;
 
@@ -14,11 +9,15 @@ public class App : IApp
 {
     private readonly IUserCommunication _userCommunication;
     private readonly IEventHandlerService _eventHandlerService;
+    private readonly ICsvProvider _csvProvider;
+    private readonly IXmlProcessor _xmlProcessor;
 
-    public App(IUserCommunication userCommunication, IEventHandlerService eventHandlerService)
+    public App(IUserCommunication userCommunication, IEventHandlerService eventHandlerService, ICsvProvider csvProvider, IXmlProcessor xmlProcessor)
     {
        _userCommunication = userCommunication;
        _eventHandlerService = eventHandlerService;
+       _csvProvider = csvProvider;
+       _xmlProcessor = xmlProcessor;
     }
 
  
@@ -30,9 +29,15 @@ public class App : IApp
         Console.ResetColor();
         Console.WriteLine("--------------------------------------------------------");
 
+        
         _eventHandlerService.SubscribeToEvents();
 
-        _userCommunication.ChooseWhatToDo();
+        _csvProvider.GeneratDataFromCsvFiles();
+        _xmlProcessor.ProcessXml();
+
+        
+
+        //_userCommunication.ChooseWhatToDo();
         
     }
 }

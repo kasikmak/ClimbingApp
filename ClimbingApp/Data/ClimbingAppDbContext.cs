@@ -1,4 +1,4 @@
-﻿using ClimbingApp.Entity;
+﻿using ClimbingApp.Data.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClimbingApp.Data;

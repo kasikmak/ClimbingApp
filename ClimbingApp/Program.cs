@@ -1,10 +1,12 @@
 ﻿
 using ClimbingApp;
+using ClimbingApp.Components.CsvReader;
+using ClimbingApp.Components.DataProviders;
+using ClimbingApp.Components.XmlProcessor;
 using ClimbingApp.Data;
-using ClimbingApp.DataProviders;
-using ClimbingApp.Entity;
-using ClimbingApp.Repositories;
-using ClimbingApp.Repositories.Extensions;
+using ClimbingApp.Data.Entity;
+using ClimbingApp.Data.Repositories;
+using ClimbingApp.Data.Repositories.Extensions;
 using ClimbingApp.Services;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,9 +22,12 @@ services.AddSingleton<IRepository<Route>, ListRepository<Route>> ();
 services.AddSingleton<IRepository<Route>, FileRepository<Route>>();
 services.AddSingleton<IClimberProvider, ClimberProvider>();
 services.AddSingleton<IRouteProvider, RouteProvider>();
-services.AddSingleton<IUserCommunication, UserCommuniction>();
+services.AddSingleton<IUserCommunication, UserCommunication>();
 services.AddSingleton<ISpecificInfoProvider, SpecificInfoProvider>();
 services.AddSingleton<IEventHandlerService, EventHandlerService>();
+services.AddSingleton<ICsvReader, CsvReader>();
+services.AddSingleton<IXmlProcessor, XmlProcessor>();
+services.AddSingleton<ICsvProvider, CsvProvider>();
 
 var serviceProvider = services.BuildServiceProvider();
 var app = serviceProvider.GetService<IApp>();
