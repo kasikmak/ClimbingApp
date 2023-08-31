@@ -11,13 +11,15 @@ public class App : IApp
     private readonly IEventHandlerService _eventHandlerService;
     private readonly ICsvProvider _csvProvider;
     private readonly IXmlProcessor _xmlProcessor;
+    private readonly IDataGenerator _dataGenerator;
 
-    public App(IUserCommunication userCommunication, IEventHandlerService eventHandlerService, ICsvProvider csvProvider, IXmlProcessor xmlProcessor)
+    public App(IUserCommunication userCommunication, IEventHandlerService eventHandlerService, ICsvProvider csvProvider, IXmlProcessor xmlProcessor, IDataGenerator dataGenerator)
     {
        _userCommunication = userCommunication;
        _eventHandlerService = eventHandlerService;
        _csvProvider = csvProvider;
        _xmlProcessor = xmlProcessor;
+       _dataGenerator = dataGenerator;
     }
 
  
@@ -32,12 +34,12 @@ public class App : IApp
         
         _eventHandlerService.SubscribeToEvents();
 
-        _csvProvider.GeneratDataFromCsvFiles();
-        _xmlProcessor.ProcessXml();
+        _dataGenerator.AddRoutes();
 
-        
+        //_csvProvider.GeneratDataFromCsvFiles();
+        //_xmlProcessor.ProcessXml();
 
-        //_userCommunication.ChooseWhatToDo();
+        _userCommunication.ChooseWhatToDo();
         
     }
 }

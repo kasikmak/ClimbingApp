@@ -9,9 +9,9 @@ public class SqlRepository<T> : IRepository<T>
 {
     private readonly DbSet<T> _dbSet;
 
-    private readonly DbContext _dbContext;
+    private readonly ClimbingAppDbContext _dbContext;
 
-    public SqlRepository(DbContext dbContext)
+    public SqlRepository(ClimbingAppDbContext dbContext)
     {
         _dbContext = dbContext;
         _dbSet = _dbContext.Set<T>();
@@ -25,6 +25,7 @@ public class SqlRepository<T> : IRepository<T>
     public void Add(T item)
     {
         _dbSet.Add(item);
+        _dbContext.SaveChanges();
         ItemAdded?.Invoke(this, item);
         HighRating?.Invoke(this, item);
     }
@@ -42,6 +43,7 @@ public class SqlRepository<T> : IRepository<T>
     public void Remove(T item)
     {
         _dbSet.Remove(item);
+        _dbContext.SaveChanges();
         ItemRemoved?.Invoke(this, item);
 
     }

@@ -1,16 +1,8 @@
 ﻿using ClimbingApp.Components.CsvReader;
 using ClimbingApp.Components.DataProviders;
 using ClimbingApp.Components.DataProviders.Extensions;
-using ClimbingApp.Components.XmlProcessor;
 using ClimbingApp.Data.Entity;
 using ClimbingApp.Data.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClimbingApp.Services;
 
@@ -60,6 +52,7 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
                 "2 - Enter new data\n" +
                 "3 - Find data by Id\n" +
                 "4 - Remove some data\n" +
+                "5 - Edit some data\n" +
                 "5 - Get specific information\n" +
                 "X - Close the app and save changes");
 
@@ -120,6 +113,24 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
                     }
                     break;
                 case "5":
+                    var userChoiceIfChange = GetInfoFromUser("You may mark the route as climbed. Do you want to do that? Y for YES N for NO").ToUpper();
+                    if (userChoiceIfChange == "Y")
+                    {
+                        var userChoiceWhatToChange = GetInfoFromUser("Please write the name of the route").ToUpper();
+                        var name = userChoiceWhatToChange;
+                        ChangeIfClimbed(name);
+                        break;
+                    }
+                    if (userChoiceIfChange == "N")
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("You have to choose YES or NO.");
+                    }
+                    break;
+                case "6":
                     _specificInfoProvider.GetSpecificInfo();
                     break;
                 case "x" or "X":
@@ -292,5 +303,35 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
         }
     }
 
+    private void ChangeIfClimbed(string name) 
+    {
+        var routes = _routeRepository.GetAll();
+        var choosenRoute = routes.Where(x=>x.Name == name).FirstOrDefault();
+
+        if (choosenRoute != null)
+        {
+            while (true)
+            {
+                var choice = GetInfoFromUser("Are you sure you want to mark the route as climbed? Y for YES or N for NO").ToUpper();
+                if (choice == "Y")
+                {
+                    choosenRoute.IsClimbed = true;
+                    _routeRepository.Save();
+                    Console.WriteLine($"{choosenRoute.Name} is marked as climbed:)");
+                    break;
+                }
+                else if (choice == "N")
+                {
+                    Console.WriteLine("Maybe next time...;)");
+                    break;
+                }
+                else
+                {
+                    WriteInColor(ConsoleColor.DarkRed, "Please enter Y or N");
+                }
+            }            
+        }              
+        
+    }
 
 }

@@ -12,6 +12,8 @@ public class Route : EntityBase
 
     public int Rating { get; set; }
 
-    public override string ToString() => $"Id: {Id} Name: {Name} Grade: {Grade} Length: {Length} m Rating: {Rating}";
+    public bool IsClimbed { get; set; }
+
+    public override string ToString() => $"Id: {Id} Name: {Name} Grade: {Grade} Length: {Length}m Rating: {Rating} Climbed: {IsClimbed}";
 
 }

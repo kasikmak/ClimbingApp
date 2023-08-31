@@ -5,13 +5,14 @@ namespace ClimbingApp.Data;
 
 public class ClimbingAppDbContext : DbContext
 {
-    public DbSet<Climber> Climbers => Set<Climber>();
 
-    public DbSet<Route> Routes => Set<Route>();
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    public ClimbingAppDbContext(DbContextOptions<ClimbingAppDbContext> options)
+        : base(options)
     {
-        base.OnConfiguring(optionsBuilder);
-        optionsBuilder.UseInMemoryDatabase("ClimbingAppStorage");
     }
+
+    public DbSet<Climber> Climbers { get; set; }
+
+    public DbSet<Route> Routes { get; set; }
+       
 }
