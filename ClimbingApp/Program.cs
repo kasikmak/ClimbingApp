@@ -1,12 +1,11 @@
-﻿
-using ClimbingApp;
-using ClimbingApp.Components.CsvReader;
-using ClimbingApp.Components.DataProviders;
-using ClimbingApp.Components.XmlProcessor;
-using ClimbingApp.Data;
-using ClimbingApp.Data.Entity;
-using ClimbingApp.Data.Repositories;
-using ClimbingApp.Services;
+﻿using ClimbingApp.ApplicationServices.Components.CsvReader;
+using ClimbingApp.ApplicationServices.Components.DataProviders;
+using ClimbingApp.ApplicationServices.Components.XmlProcessor;
+using ClimbingApp.ApplicationServices.Services;
+using ClimbingApp.DataAccess.Data;
+using ClimbingApp.DataAccess.Data.Entity;
+using ClimbingApp.DataAccess.Data.Repositories;
+using ClimbingApp.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.Extensions.DependencyInjection;
