@@ -14,9 +14,9 @@ namespace ClimbingApp.ApplicationServices.Services;
 public class DataGenerator : IDataGenerator
 {
     private readonly ClimbingAppDbContext _dbContext;
-    private readonly CsvReader _csvReader;
+    private readonly ICsvReader _csvReader;
 
-    public DataGenerator(ClimbingAppDbContext dbContext, CsvReader csvReader)
+    public DataGenerator(ClimbingAppDbContext dbContext, ICsvReader csvReader)
     {
         _dbContext = dbContext;
         _csvReader = csvReader;
@@ -25,7 +25,7 @@ public class DataGenerator : IDataGenerator
 
    public void AddClimbers()
     {
-        var climbers = _csvReader.ProcessClimbers("Resources\\Files\\climbers.csv");
+        var climbers = _csvReader.ProcessClimbers("DataAccess\\Resources\\Files\\climbers.csv");
 
         if (_dbContext.Database.CanConnect() && !_dbContext.Climbers.Any())
         {

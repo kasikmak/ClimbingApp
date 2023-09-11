@@ -14,6 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="DataAccess\Resources\Files\climbers.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="DataAccess\Resources\Files\fuel.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
